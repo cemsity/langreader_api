@@ -1,3 +1,4 @@
+from backend.app.models import Language
 from ..article import bp
 from ..article.model import Article
 from backend.app.extentions import db 
@@ -33,12 +34,15 @@ def get_article_by_title(title:str):
 @bp.route("/article/new", methods=["POST"])
 def create_article():
     req = request.get_json()
-    user = User.query.filter_by(id=req["user"]).first()
+    user = User.query.filter_by(id=req.get("user")).first()
     if user:
-        article = Article(user=user, title=req["title"], text=req["text"])
-        db.session.add(article)
-        db.session.commit()
-        return f"Article:{req['title']} successfully added", 200
+        try:
+            article = Article(user=user, title=req["title"], text=req["text"], language=req["language"])
+            db.session.add(article)
+            db.session.commit()
+            return f"Article:{req['title']} successfully added", 200
+        except ValueError:
+            return f"title, text, language are required", 400
     return f"User id: {req['user']} not found", 404
 
 @bp.route("/article/update", methods=["PUT"])
@@ -69,10 +73,11 @@ def build_article_response(article: Article):
             'user_id': article.user_id,
             "title": article.title,
             "text" : article.text,
+            "language": article.language, 
             "words": [{"id": w.id, "word": w.word, "level": w.level} for w in article.words]
         }
 
 def build_articles_response(articles: List[Article]):
     out = dict(articles = [])
-    out["articles"] = [{"id":art.id, "user_id":art.user_id, "title":art.title} for art in articles]
+    out["articles"] = [{"id":art.id, "user_id":art.user_id, "title":art.title, "language":art.language} for art in articles]
     return out 

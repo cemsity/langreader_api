@@ -19,10 +19,11 @@ class Article(db.Model):
         )
 
     
-    def __init__(self, title, text, *args, **kwargs):
+    def __init__(self, title, text, language, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title = title
         self.text = text
+        self.language = language
         word_set = Article.setify(text)
         self.make_words(word_set)
 

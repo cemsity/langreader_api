@@ -41,7 +41,7 @@ class Word(db.Model):
         res = cls.query.filter_by(user_id=user.id, word=word, language=lang).first()
         if res:
             return res
-        return cls(user=user, word=word)
+        return cls(user=user, word=word, language=lang)
     
     @classmethod
     def get_all(cls) -> List[Any]: #words is the datatype but I am not going to fix the typing python typing issue yet.
