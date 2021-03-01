@@ -3,7 +3,7 @@ An initial prototype for langreader
 
 Flask based api with currently sqlite database
 
-#Todo:
+# Todo:
 - Change to Postgres
 - Dockerize
 - Real User Authentication
