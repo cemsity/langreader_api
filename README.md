@@ -4,6 +4,7 @@ An initial prototype for langreader
 Flask based api with currently sqlite database
 
 # Todo:
+-  Switch to FastAPI
 -  Real User Authentication
 -  Change to Postgres
 -  Dockerize
