@@ -12,9 +12,13 @@ click = "*"
 flask-mail = "*"
 flask-bcrypt = "*"
 pycountry = "*"
+flask-login = "*"
+pytest = "*"
 
 [dev-packages]
 python-dotenv = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.9"
