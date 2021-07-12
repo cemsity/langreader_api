@@ -10,7 +10,7 @@ class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     title = db.Column(db.String, nullable=False)
-    text = db.Column(db.Text(convert_unicode=True), nullable=False)
+    text = db.Column(db.Text, nullable=False)
     language = db.Column(db.String, default="N/S")
     words = db.relationship(
         "Word", 
